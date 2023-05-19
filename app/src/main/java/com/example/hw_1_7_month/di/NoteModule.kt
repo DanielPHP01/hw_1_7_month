@@ -25,7 +25,7 @@ object NoteModule {
         context,
         NoteDatabase::class.java,
         "note_db"
-    )
+    ).build()
 
     @Provides
     fun provideNoteDao(noteDatabase: NoteDatabase) = noteDatabase.noteDao()

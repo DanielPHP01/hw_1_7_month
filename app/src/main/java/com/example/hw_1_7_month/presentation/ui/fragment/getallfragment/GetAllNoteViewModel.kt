@@ -11,27 +11,24 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class GetAllNoteViewModel: BaseViewModel() {
-    class FirstViewModel @Inject constructor(
-        private val getAllNoteUseCase: GetAllNoteUseCase,
-        private val removeNoteUseCase: RemoveNoteUseCase
-    ) : BaseViewModel() {
+class GetAllNoteViewModel @Inject constructor(
+    private val getAllNoteUseCase: GetAllNoteUseCase,
+    private val removeNoteUseCase: RemoveNoteUseCase
+) : BaseViewModel() {
+
+    private val _getAllNotesUseCase = MutableStateFlow<UIState<List<Note>>>(UIState.Empty())
+    val getAllNoteState = _getAllNotesUseCase.asStateFlow()
 
 
-        private val _getAllNotesUseCase = MutableStateFlow<UIState<List<Note>>>(UIState.Empty())
-        val getAllNoteState = _getAllNotesUseCase.asStateFlow()
+    private val _deleteNoteUseCase = MutableStateFlow<UIState<Unit>>(UIState.Empty())
+    val deleteNoteState = _deleteNoteUseCase.asStateFlow()
 
 
-        private val _deleteNoteUseCase = MutableStateFlow<UIState<Unit>>(UIState.Empty())
-        val deleteNoteState = _deleteNoteUseCase.asStateFlow()
+    fun getAllNotes() {
+        getAllNoteUseCase.getAllNotes().collectFlow(_getAllNotesUseCase)
+    }
 
-
-        fun getAllNotes() {
-            getAllNoteUseCase.getAllNotes().collectFlow(_getAllNotesUseCase)
-        }
-
-        fun removeNote(note: Note) {
-            removeNoteUseCase.removeNote(note).collectFlow(_deleteNoteUseCase)
-        }
+    fun removeNote(note: Note) {
+        removeNoteUseCase.removeNote(note).collectFlow(_deleteNoteUseCase)
     }
 }
