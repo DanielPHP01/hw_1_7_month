@@ -1,5 +1,6 @@
 package com.example.hw_1_7_month.presentation.ui.fragment.getallfragment.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,7 +8,7 @@ import com.example.hw_1_7_month.databinding.ItemNoteBinding
 import com.example.hw_1_7_month.domain.model.Note
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
-    private var list = emptyList<Note>()
+    private var data = arrayListOf<Note>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
@@ -20,27 +21,26 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        return holder.bind(list[position])
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return data.size
     }
 
-
-    @JvmName("setList1")
     fun setList(list: List<Note>) {
-        this.list = list
+        data.clear()
+        data.addAll(list)
+        notifyDataSetChanged()
     }
 
     inner class NoteViewHolder(private val binding: ItemNoteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(noteEntity: Note) {
-            with(binding) {
-                tvTextTitle.text = noteEntity.title
-                tvDesc.text = noteEntity.desc
+        fun bind(note: Note) {
+            binding.apply {
+                tvTextTitle.text = note.title
+                tvDesc.text = note.desc
             }
-
         }
     }
 }

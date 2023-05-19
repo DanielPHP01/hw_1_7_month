@@ -19,62 +19,56 @@ class GetAllNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentGetAllNoteBinding
     private lateinit var adapter: NoteAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        adapter = NoteAdapter()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentGetAllNoteBinding.inflate(layoutInflater)
+        binding = FragmentGetAllNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        utils()
-        getAll()
+        adapter = NoteAdapter()
+        binding.recyclerView.adapter = adapter
+        setupUtils()
+        getAllNotes()
     }
 
-    private fun utils() {
-
+    private fun setupUtils() {
         binding.btnCreate.setOnClickListener {
             findNavController().navigate(R.id.createNoteFragment)
         }
     }
 
-    private fun delete() {
+    private fun getAllNotes() {
+        viewModel.getAllNotes()
+        viewModel.getAllNoteState.collectState(
+            onLoading = {
+                binding.progressBar.visibility = View.VISIBLE
+            },
+            Error = { error ->
+                Toast.makeText(requireContext(), "Error: $error", Toast.LENGTH_SHORT).show()
+            },
+            onSuccess = { notes ->
+                binding.progressBar.visibility = View.GONE
+                adapter.setList(notes)
+            }
+        )
+    }
 
+    private fun deleteNote() {
         viewModel.deleteNoteState.collectState(
             onLoading = {
                 binding.progressBar.visibility = View.VISIBLE
             },
-            Error = {
-                Toast.makeText(requireContext(), "error${it}", Toast.LENGTH_SHORT).show()
+            Error = { error ->
+                Toast.makeText(requireContext(), "Error: $error", Toast.LENGTH_SHORT).show()
             },
             onSuccess = {
-
-            })
-
-
-    }
-
-    private fun getAll() {
-        viewModel.getAllNoteState.collectState(
-            onLoading = {
-                binding.progressBar.visibility = View.VISIBLE
-
-
-            },
-            Error = {
-                Toast.makeText(requireContext(), "error${it}", Toast.LENGTH_SHORT).show()
-            },
-            onSuccess = {
-                binding.recyclerView.adapter = adapter
-
-                adapter.setList(it)
-            })
+                // Handle delete note success
+            }
+        )
     }
 }

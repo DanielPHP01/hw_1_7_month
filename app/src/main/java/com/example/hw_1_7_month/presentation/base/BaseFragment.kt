@@ -14,7 +14,7 @@ abstract class BaseFragment : Fragment() {
         Error: (message: String) -> Unit,
         onSuccess: (data: T) -> Unit
     ) {
-        lifecycleScope.launch {
+       viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 this@collectState.collect { state ->
                     when (state) {

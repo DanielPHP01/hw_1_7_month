@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hw_1_7_month.databinding.FragmentCreateNoteBinding
 import com.example.hw_1_7_month.domain.model.Note
+import com.example.hw_1_7_month.domain.utils.UIState
 import com.example.hw_1_7_month.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,55 +20,64 @@ class CreateNoteFragment : BaseFragment() {
     private lateinit var binding: FragmentCreateNoteBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCreateNoteBinding.inflate(layoutInflater)
+        binding = FragmentCreateNoteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        create()
+        initClickers()
     }
 
-    private fun edit() {
+    private fun initClickers() {
+        binding.btnDesc.setOnClickListener {
+            if (arguments?.getInt("id") != null) {
+                val note = arguments?.getSerializable("note") as Note
+                note.title = binding.tvTitle.text.toString()
+                note.desc = binding.tvDesc.text.toString()
+                editNote(note)
+            } else {
+                val note = Note(
+                    title = binding.tvTitle.text.toString(),
+                    desc = binding.tvDesc.text.toString()
+                )
+                createNote(note)
+            }
+        }
+    }
+
+    private fun createNote(note: Note) {
+        viewModel.createNote(note)
+        viewModel.createNoteState.collectState(
+            onLoading = {
+                binding.progressBar.visibility = View.VISIBLE
+            },
+            Error = { error ->
+                Toast.makeText(requireContext(), "Error: $error", Toast.LENGTH_SHORT).show()
+            },
+            onSuccess = { createdNote ->
+                Log.d("ololo", "Created note: $createdNote")
+                findNavController().navigateUp()
+            }
+        )
+    }
+
+    private fun editNote(note: Note) {
+        viewModel.editNote(note)
         viewModel.editNoteState.collectState(
             onLoading = {
                 binding.progressBar.visibility = View.VISIBLE
             },
-            Error = {
-                Toast.makeText(requireContext(), "error${it}", Toast.LENGTH_SHORT).show()
-
+            Error = { error ->
+                Toast.makeText(requireContext(), "Error: $error", Toast.LENGTH_SHORT).show()
             },
             onSuccess = {
-
+                // Handle edit note success
             }
         )
-
-    }
-
-    private fun create() {
-        binding.btnDesc.setOnClickListener {
-            val title = binding.tvTitle.text.toString()
-            val description = binding.tvDesc.text.toString()
-            if (title.isEmpty() || description.isEmpty()) {
-                Toast.makeText(requireContext(), "Заполните", Toast.LENGTH_SHORT).show()
-            } else {
-
-                viewModel.createNoteState.collectState(
-                    onLoading = {
-                        binding.progressBar.visibility = View.VISIBLE
-                    },
-                    Error = {
-                        Toast.makeText(requireContext(), "error${it}", Toast.LENGTH_SHORT).show()
-                    },
-                    onSuccess = {
-                        Note(0, title, description)
-                        Log.e("ololo", "create:${it} ")
-                        findNavController().navigateUp()
-                    })
-            }
-        }
     }
 }
