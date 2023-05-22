@@ -20,8 +20,8 @@ object Versions {
 object Deps {
     object Room {
         const val runtime = "androidx.room:room-runtime:${Versions.room}"
-        const val compiler = "androidx.room:room-compiler:${Versions.room}"
-        const val ktx = "androidx.room:room-ktx:${Versions.room}"
+        const val compiler ="androidx.room:room-compiler:${Versions.room}"
+        const val room = "androidx.room:room-ktx:${Versions.room}"
     }
 
     object DaggerHilt {
@@ -29,6 +29,7 @@ object Deps {
         const val core = "com.google.dagger:hilt-core:${Versions.hilt}"
         const val compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     }
+
     object UI {
         const val androidCore = "androidx.core:core-ktx:${Versions.androidCore}"
         const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
@@ -39,25 +40,31 @@ object Deps {
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
         const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     }
+
     object Coroutines {
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+        const val android =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     }
+
     object NavComponent {
         const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val ui = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     }
-    object Lifecycle {
-        const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    }
 
-    object JavaX {
-        const val inject = "javax.inject:javax.inject:1"
-    }
-    object Duplicate {
-        const val kotlin = "org.jetbrains.kotlin:kotlin-bom:${Versions.kotlin}"
+    object Lifecycle {
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     }
 }
+
+object JavaX {
+    const val inject = "javax.inject:javax.inject:1"
+}
+//    object Duplicate {
+//        const val kotlin = "org.jetbrains.kotlin:kotlin-bom:${Versions.kotlin}"
+//    }
+
 
 object Plugins {
     object AGP {
@@ -68,10 +75,13 @@ object Plugins {
     object Kotlin {
         const val android = "org.jetbrains.kotlin.android"
         const val kapt = "kotlin-kapt"
+        const val jvm = "org.jetbrains.kotlin.jvm"
     }
-    object DaggerHilt{
+
+    object DaggerHilt {
         const val hilt = "com.google.dagger.hilt.android"
     }
+
     object Java {
         const val library = "java-library"
     }

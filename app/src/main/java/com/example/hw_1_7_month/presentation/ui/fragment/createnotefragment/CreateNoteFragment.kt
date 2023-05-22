@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.hw_1_7_month.databinding.FragmentCreateNoteBinding
 import com.example.hw_1_7_month.domain.model.Note
-import com.example.hw_1_7_month.domain.utils.UIState
 import com.example.hw_1_7_month.presentation.base.BaseFragment
+import com.example.lesson1month8.databinding.FragmentCreateNoteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

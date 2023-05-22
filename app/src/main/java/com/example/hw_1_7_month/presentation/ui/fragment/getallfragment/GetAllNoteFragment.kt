@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.hw_1_7_month.R
-import com.example.hw_1_7_month.databinding.FragmentGetAllNoteBinding
 import com.example.hw_1_7_month.presentation.base.BaseFragment
 import com.example.hw_1_7_month.presentation.ui.fragment.getallfragment.adapter.NoteAdapter
+import com.example.lesson1month8.R
+import com.example.lesson1month8.databinding.FragmentGetAllNoteBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

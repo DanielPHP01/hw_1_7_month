@@ -1,11 +1,10 @@
 package com.example.hw_1_7_month.presentation.ui.fragment.getallfragment.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hw_1_7_month.databinding.ItemNoteBinding
 import com.example.hw_1_7_month.domain.model.Note
+import com.example.lesson1month8.databinding.ItemNoteBinding
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     private var data = arrayListOf<Note>()

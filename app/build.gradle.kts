@@ -6,20 +6,17 @@ plugins {
 }
 
 android {
-    namespace = "com.example.Note-App"
+    namespace = AppConfig.namespace
     compileSdk = AppConfig.compileSdk
-
     defaultConfig {
-        applicationId = "com.example.Note-App"
+        applicationId = AppConfig.applicationId
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
-
-        testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        testInstrumentationRunner = AppConfig.TestInstrumentation
     }
-
-    buildTypes {
+        buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -29,11 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_9
-        targetCompatibility = JavaVersion.VERSION_1_9
+        sourceCompatibility = AppConfig.compatibility
+        targetCompatibility = AppConfig.compatibility
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfig.jvmTarget
     }
     buildFeatures {
         viewBinding = true
@@ -59,8 +56,8 @@ dependencies {
 
     // Room
     implementation(Deps.Room.runtime)
-    implementation(Deps.Room.compiler)
-    kapt(Deps.Room.ktx)
+    kapt(Deps.Room.compiler)
+    implementation(Deps.Room.room)
 
     // Hilt
     implementation(Deps.DaggerHilt.android)
@@ -75,8 +72,6 @@ dependencies {
     implementation(Deps.NavComponent.ui)
 
     // Lifecycle
-    implementation(Deps.Lifecycle.lifecycle)
-
-    //fix Duplicate
-    implementation(platform(Deps.Duplicate.kotlin))
+    implementation(Deps.Lifecycle.viewModel)
+    implementation(Deps.Lifecycle.runtime)
 }

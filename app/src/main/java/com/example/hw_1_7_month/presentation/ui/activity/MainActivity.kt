@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.example.hw_1_7_month.R
-import com.example.hw_1_7_month.databinding.ActivityMainBinding
+import com.example.lesson1month8.R
+import com.example.lesson1month8.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
