@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.example.hw_1_7_month.data.local.NoteDao
 import com.example.hw_1_7_month.data.local.NoteDatabase
 import com.example.hw_1_7_month.data.repositories.NoteRepositoryImpl
-import com.example.hw_1_7_month.domain.repositories.NoteRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NoteModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideNoteDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(
@@ -31,7 +30,7 @@ object NoteModule {
     fun provideNoteDao(noteDatabase: NoteDatabase) = noteDatabase.noteDao()
 
     @Provides
-    fun provideNoteRepository(noteDao:NoteDao): NoteRepository {
+    fun provideNoteRepository(noteDao: NoteDao): NoteRepositoryImpl {
         return NoteRepositoryImpl(noteDao)
     }
 }

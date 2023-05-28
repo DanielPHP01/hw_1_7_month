@@ -1,7 +1,7 @@
-package com.example.hw_1_7_month.domain.repositories
+package com.example.hw_1_7_month.domain.domain.repositories
 
+import com.example.hw_1_7_month.domain.domain.utils.Resource
 import com.example.hw_1_7_month.domain.model.Note
-import com.example.hw_1_7_month.domain.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 

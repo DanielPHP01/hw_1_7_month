@@ -1,8 +1,8 @@
 package com.example.hw_1_7_month.presentation.ui.fragment.getallfragment
 
 import com.example.hw_1_7_month.domain.model.Note
-import com.example.hw_1_7_month.domain.usecase.GetAllNoteUseCase
-import com.example.hw_1_7_month.domain.usecase.RemoveNoteUseCase
+import com.example.hw_1_7_month.domain.domain.usecase.GetAllNoteUseCase
+import com.example.hw_1_7_month.domain.domain.usecase.RemoveNoteUseCase
 import com.example.hw_1_7_month.domain.utils.UIState
 import com.example.hw_1_7_month.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

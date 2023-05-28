@@ -1,4 +1,4 @@
-package com.example.hw_1_7_month.domain.utils
+package com.example.hw_1_7_month.domain.domain.utils
 
 sealed class Resource<T>(
     val data: T? = null,

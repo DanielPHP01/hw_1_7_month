@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":domain"))
     // Android
     implementation(Deps.UI.androidCore)
     implementation(Deps.UI.appcompat)
@@ -45,7 +47,6 @@ dependencies {
 
     // UI
     implementation(Deps.UI.constraint)
-
     // Test
     testImplementation(Deps.UI.junit)
     androidTestImplementation(Deps.UI.extJunit)

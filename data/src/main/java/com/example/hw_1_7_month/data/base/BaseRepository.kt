@@ -1,6 +1,6 @@
 package com.example.hw_1_7_month.data.base
 
-import com.example.hw_1_7_month.domain.utils.Resource
+import com.example.hw_1_7_month.domain.domain.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn

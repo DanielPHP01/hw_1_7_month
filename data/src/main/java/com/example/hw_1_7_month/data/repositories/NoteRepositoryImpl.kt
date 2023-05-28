@@ -4,8 +4,8 @@ import com.example.hw_1_7_month.data.base.BaseRepository
 import com.example.hw_1_7_month.data.local.NoteDao
 import com.example.hw_1_7_month.data.mappers.toEntity
 import com.example.hw_1_7_month.data.mappers.toNote
+import com.example.hw_1_7_month.domain.domain.repositories.NoteRepository
 import com.example.hw_1_7_month.domain.model.Note
-import com.example.hw_1_7_month.domain.repositories.NoteRepository
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
